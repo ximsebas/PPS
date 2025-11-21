@@ -1,36 +1,32 @@
-
 $(document).ready(function () {
+  $(document).on("submit", "#loginForm", (e) => {
+    e.preventDefault();
+    login();
+  });
 
-
-    $(document).on("submit", "#loginForm", (e)=> {
-
-        e.preventDefault();
-        login();
+  const login = () => {
+    $.ajax({
+      type: "POST",
+      url: "controllers/login.php",
+      data: $("#loginForm").serialize(),
+      dataType: "json",
+    }).done((response) => {
+      if (response.success) {
+        $("#message").html(
+          '<p style="color: green;">¡Login exitoso! Redirigiendo...</p>'
+        );
+        setTimeout(() => {
+          window.location.href = "dashboard.html";
+        }, 1500);
+      } else {
+        $("#message").html(
+          `<p style="color: red;">Error: ${response.message}</p>`
+        );
+      }
     });
+  };
 
-
-
-    const login = ()=>{
-
-        $.ajax({
-            type: "POST",
-            url: "controllers/login.php",
-            data: $("#loginForm").serialize(),
-            dataType: "json"
-        }).done((response)=>{
-            if(response.success){
-                $("#message").html('<p style="color: green;">¡Login exitoso! Redirigiendo...</p>');
-                setTimeout(()=>{
-                    window.location.href = "dashboard.html";
-                }, 1500);
-            } else {
-                $("#message").html(`<p style="color: red;">Error: ${response.message}</p>`);
-            }
-        });
-
-    }
-
-/*
+  /*
     document
     .getElementById("loginForm")
     .addEventListener("submit", async function (e) {
@@ -75,7 +71,4 @@ $(document).ready(function () {
     });
 
 */
-
-
-
-    });
+});
