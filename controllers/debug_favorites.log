@@ -1,0 +1,56 @@
+=== 2025-11-07 05:17:47 ===
+User ID: 1
+Movie ID: tt0126029
+Movie Title: Shrek
+Movie Poster: https://m.media-amazon.com/images/M/MV5BN2FkMTRkNT...
+Movie Year: 2001
+Favoritos existentes:
+ - ID: 0 | Título: Cars
+Película YA EXISTE en favoritos
+=== 2025-11-07 05:17:56 ===
+User ID: 1
+Movie ID: tt3606752
+Movie Title: Cars 3
+Movie Poster: https://m.media-amazon.com/images/M/MV5BMTc0NzU2OT...
+Movie Year: 2017
+Favoritos existentes:
+Película AGREGADA exitosamente
+=== 2025-11-07 05:18:30 ===
+User ID: 1
+Movie ID: tt0126029
+Movie Title: Shrek
+Movie Poster: https://m.media-amazon.com/images/M/MV5BN2FkMTRkNT...
+Movie Year: 2001
+Favoritos existentes:
+ - ID: 0 | Título: Cars 3
+Película YA EXISTE en favoritos
+=== 2025-11-07 05:37:03 ===
+User ID: 1
+Movie ID recibido: '813' (tipo: string)
+Movie Title: 'Shrek 2'
+Movie Year: '2004'
+✅ Película AGREGADA exitosamente - ID: 813, Título: Shrek 2
+=== 2025-11-07 05:37:09 ===
+User ID: 1
+Movie ID recibido: '246' (tipo: string)
+Movie Title: 'Titanic'
+Movie Year: '1997'
+✅ Película AGREGADA exitosamente - ID: 246, Título: Titanic
+=== 2025-11-07 05:37:54 ===
+User ID: 1
+Movie ID recibido: '416' (tipo: string)
+Movie Title: 'Harry Potter and the Deathly Hallows: Part 2'
+Movie Year: '2011'
+✅ Película AGREGADA exitosamente - ID: 416, Título: Harry Potter and the Deathly Hallows: Part 2
+=== 2025-11-07 05:38:15 ===
+User ID: 2
+Movie ID recibido: '240' (tipo: string)
+Movie Title: 'The Avengers'
+Movie Year: '2012'
+✅ Película AGREGADA exitosamente - ID: 240, Título: The Avengers
+=== 2025-11-07 06:03:26 ===
+User ID: 1
+Movie ID recibido: 'tt1216475' (tipo: string)
+Movie Title: 'Cars 2'
+Movie Year: '2011'
+❌ ERROR: Movie ID no es un número válido: tt1216475

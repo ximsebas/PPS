@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mis Favoritos - Buscador Películas y Series</title>
+    <link rel="stylesheet" href="sources/styles/style.css" />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <header class="dashboard-header">
+        <h1>❤️ Mis Películas y Series Favoritas</h1>
+        <div class="user-info">
+          <a href="dashboard.html" class="btn-favorites"
+            >🔍 Volver al Buscador</a
+          >
+          <a href="index.html" class="btn-logout">Cerrar Sesión</a>
+        </div>
+      </header>
+
+      <main class="container">
+        <div id="loading" style="display: none; text-align: center">
+          <p>Cargando favoritos...</p>
+        </div>
+
+        <div id="favorites-container" class="movies-grid">
+          <!-- Aquí se mostrarán los favoritos -->
+        </div>
+
+        <div
+          id="no-favorites"
+          style="display: none; text-align: center; padding: 40px"
+        >
+          <h3>No tienes películas o Series favoritas aún</h3>
+          <p>¡Ve al buscador y agrega algunas!</p>
+          <a
+            href="dashboard.html"
+            class="btn"
+            style="
+              display: inline-block;
+              margin-top: 20px;
+              padding: 10px 20px;
+              background: #3498db;
+              color: white;
+              text-decoration: none;
+              border-radius: 5px;
+            "
+            >Buscar Películas y Series</a
+          >
+        </div>
+      </main>
+    </div>
+
+     <script src="sources/scripts/favorites.js" type="module"></script>
+
+  </body>
+</html>

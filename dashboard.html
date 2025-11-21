@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Buscador Películas y Series</title>
+    <link rel="stylesheet" href="sources/styles/style.css" />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <header class="dashboard-header">
+        <h1>🎬 Buscador de Películas y Series</h1>
+        <div class="user-info">
+          <a href="favorites.html" class="btn-favorites">❤️ Mis Favoritos</a>
+          <span id="userName">Usuario</span>
+          <a href="index.html" class="btn-logout">Cerrar Sesión</a>
+        </div>
+      </header>
+
+      <main class="container">
+        <div class="search-section">
+          <h2>Buscar Películas y Series</h2>
+          <div class="search-box">
+            <input
+              type="text"
+              id="searchInput"
+              placeholder="Ej: Avengers, Titanic, The Godfather..."
+            />
+            <button id="searchBtn">Buscar</button>
+          </div>
+        </div>
+
+        <div id="loading" style="display: none; text-align: center">
+          <p>Buscando películas...</p>
+        </div>
+
+        <div id="movies-container" class="movies-grid">
+          <p class="placeholder">
+            Ingresa el nombre de una película para buscar
+          </p>
+        </div>
+      </main>
+    </div>
+
+    <!-- Modal para sinopsis -->
+    <div id="movieModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="modal-body">
+          <!-- Aquí se cargará la información de la película -->
+        </div>
+      </div>
+    </div>
+
+    <script src="sources/scripts/dashboard.js" type="module"></script>
+
+  </body>
+</html>
