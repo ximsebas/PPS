@@ -12,8 +12,48 @@
         <h1>🎬 Buscador de Películas y Series</h1>
         <div class="user-info">
           <a href="favorites.html" class="btn-favorites">❤️ Mis Favoritos</a>
-          <span id="userName">Usuario</span>
-          <a href="index.html" class="btn-logout">Cerrar Sesión</a>
+          <a href="password.html" class="btn-favorites"
+            >🔐 Cambiar Contraseña</a
+          >
+
+          <!-- NUEVO COMPONENTE DE USUARIO -->
+          <div class="user-menu">
+            <div class="user-avatar" id="userAvatar">
+              <span class="avatar-icon">👤</span>
+            </div>
+            <span class="user-name" id="userName">Usuario</span>
+            <div class="user-dropdown">
+              <div class="dropdown-content">
+                <div class="user-profile">
+                  <div class="profile-avatar">
+                    <span class="avatar-icon">👤</span>
+                  </div>
+                  <div class="profile-info">
+                    <div class="profile-name" id="dropdownUserName">
+                      Usuario
+                    </div>
+                    <div class="profile-email" id="userEmail">
+                      usuario@email.com
+                    </div>
+                  </div>
+                </div>
+                <div class="dropdown-divider"></div>
+                <a href="favorites.html" class="dropdown-item">
+                  <span class="item-icon">❤️</span>
+                  Mis Favoritos
+                </a>
+                <a href="password.html" class="dropdown-item">
+                  <span class="item-icon">🔐</span>
+                  Cambiar Contraseña
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="index.html" class="dropdown-item logout">
+                  <span class="item-icon">🚪</span>
+                  Cerrar Sesión
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </header>
 
@@ -24,7 +64,7 @@
             <input
               type="text"
               id="searchInput"
-              placeholder="Ej: Avengers, Titanic, The Godfather..."
+              placeholder="Buscar películas o series..."
             />
             <button id="searchBtn">Buscar</button>
           </div>
@@ -35,9 +75,7 @@
         </div>
 
         <div id="movies-container" class="movies-grid">
-          <p class="placeholder">
-            Ingresa el nombre de una película para buscar
-          </p>
+          <!-- Las películas aparecerán aquí -->
         </div>
       </main>
     </div>
@@ -56,4 +94,4 @@
   </body>
 </html>
 
-//cambios realizados en dashboard
+//cambios realizados en dashboard2

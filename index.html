@@ -6,14 +6,103 @@
     <title>Buscador de Películas y Series</title>
     <link rel="stylesheet" href="sources/styles/style.css" />
   </head>
-  <body>
-    <div class="container">
-      <h1>🎬 Buscador de Películas y Series</h1>
-      <p>Bienvenido al mejor buscador de películas y series</p>
-      <div class="buttons">
-        <a href="login.html" class="btn">Iniciar Sesión</a>
-        <a href="register.html" class="btn">Registrarse</a>
-      </div>
+  <body class="landing-body">
+    <!-- Fondo animado con partículas -->
+    <div class="particles-container" id="particles"></div>
+
+    <div class="landing-container">
+      <!-- Header elegante -->
+      <header class="landing-header">
+        <div class="logo">
+          <span class="logo-icon">🎬</span>
+          <span class="logo-text">CineBúsqueda</span>
+        </div>
+      </header>
+
+      <!-- Hero Section -->
+      <main class="hero-section">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span>✨ La mejor experiencia cinematográfica</span>
+          </div>
+
+          <h1 class="hero-title">
+            Descubre el mundo del
+            <span class="gradient-text">cine</span>
+            como nunca antes
+          </h1>
+
+          <p class="hero-description">
+            Explora miles de películas y series, guarda tus favoritos y disfruta
+            de sinopsis traducidas. Todo en un solo lugar, diseñado para los
+            verdaderos amantes del cine.
+          </p>
+
+          <!-- Estadísticas -->
+          <div class="stats-container">
+            <div class="stat-item">
+              <div class="stat-number">10,000+</div>
+              <div class="stat-label">Películas</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">5,000+</div>
+              <div class="stat-label">Series</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">🌍</div>
+              <div class="stat-label">Traducciones</div>
+            </div>
+          </div>
+
+          <!-- Botones de acción -->
+          <div class="hero-buttons">
+            <a href="login.html" class="btn btn-primary">
+              <span class="btn-icon">🚀</span>
+              Iniciar Sesión
+            </a>
+            <a href="register.html" class="btn btn-secondary">
+              <span class="btn-icon">⭐</span>
+              Crear Cuenta
+            </a>
+          </div>
+
+          <!-- Características -->
+          <div class="features-grid">
+            <div class="feature-card">
+              <div class="feature-icon">🔍</div>
+              <h3>Búsqueda Inteligente</h3>
+              <p>Encuentra cualquier película o serie en segundos</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">❤️</div>
+              <h3>Favoritos</h3>
+              <p>Guarda tus películas preferidas para ver después</p>
+            </div>
+            <div class="feature-card">
+              <div class="feature-icon">🌍</div>
+              <h3>Traducciones</h3>
+              <p>Sinopsis traducidas al español al instante</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ilustración decorativa -->
+        <div class="hero-visual">
+          <div class="floating-cards">
+            <div class="card card-1">🎭</div>
+            <div class="card card-2">🎪</div>
+            <div class="card card-3">📽️</div>
+            <div class="card card-4">🌟</div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="landing-footer">
+        <p>© 2024 CineBúsqueda. Hecho con ❤️ para amantes del cine</p>
+      </footer>
     </div>
+
+    <script src="sources/scripts/landing.js"></script>
   </body>
 </html>

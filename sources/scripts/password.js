@@ -1,27 +1,27 @@
-// register.js - Manejo del formulario de registro
+// password.js - Manejo del formulario de cambio de contraseña
 
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("📝 Formulario de registro inicializado");
+  console.log("🔐 Formulario de cambio de contraseña inicializado");
 
-  const registerForm = document.getElementById("registerForm");
-  if (!registerForm) return;
+  const passwordForm = document.getElementById("changePasswordForm");
+  if (!passwordForm) return;
 
-  registerForm.addEventListener("submit", handleRegister);
+  passwordForm.addEventListener("submit", handlePasswordChange);
 });
 
 /**
- * Maneja el envío del formulario de registro
+ * Maneja el cambio de contraseña
  */
-async function handleRegister(e) {
+async function handlePasswordChange(e) {
   e.preventDefault();
 
   const submitBtn = document.querySelector(".btn-login");
-  const nombre = document.getElementById("nombre").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
+  const currentPassword = document.getElementById("currentPassword").value;
+  const newPassword = document.getElementById("newPassword").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
 
-  // Validaciones del frontend
-  if (!validateForm(nombre, email, password)) {
+  // Validaciones
+  if (!validatePasswordForm(currentPassword, newPassword, confirmPassword)) {
     return;
   }
 
@@ -30,21 +30,21 @@ async function handleRegister(e) {
   clearMessages();
 
   try {
-    const response = await fetch("controllers/register.php", {
+    const response = await fetch("controllers/change_password.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: `nombre=${encodeURIComponent(nombre)}&email=${encodeURIComponent(
-        email
-      )}&password=${encodeURIComponent(password)}`,
+      body: `currentPassword=${encodeURIComponent(
+        currentPassword
+      )}&newPassword=${encodeURIComponent(newPassword)}`,
     });
 
     const result = await response.json();
 
     if (result.success) {
       showMessage("✅ " + result.message, "success");
-      registerForm.reset();
+      document.getElementById("changePasswordForm").reset();
 
       // Redirigir después de éxito
       setTimeout(() => {
@@ -54,7 +54,7 @@ async function handleRegister(e) {
       showMessage("❌ " + result.message, "error");
     }
   } catch (error) {
-    console.error("Error en registro:", error);
+    console.error("Error cambiando contraseña:", error);
     showMessage("❌ Error de conexión. Intenta nuevamente.", "error");
   } finally {
     setButtonLoading(submitBtn, false);
@@ -62,40 +62,41 @@ async function handleRegister(e) {
 }
 
 /**
- * Valida los datos del formulario
+ * Valida el formulario de cambio de contraseña
  */
-function validateForm(nombre, email, password) {
+function validatePasswordForm(currentPassword, newPassword, confirmPassword) {
   clearMessages();
 
-  if (!nombre || !email || !password) {
+  if (!currentPassword || !newPassword || !confirmPassword) {
     showMessage("❌ Todos los campos son requeridos", "error");
     return false;
   }
 
-  if (password.length < 6) {
-    showMessage("❌ La contraseña debe tener al menos 6 caracteres", "error");
+  if (newPassword.length < 6) {
+    showMessage(
+      "❌ La nueva contraseña debe tener al menos 6 caracteres",
+      "error"
+    );
     return false;
   }
 
-  if (!isValidEmail(email)) {
-    showMessage("❌ Ingresa un email válido", "error");
+  if (newPassword !== confirmPassword) {
+    showMessage("❌ Las contraseñas no coinciden", "error");
+    return false;
+  }
+
+  if (currentPassword === newPassword) {
+    showMessage(
+      "❌ La nueva contraseña debe ser diferente a la actual",
+      "error"
+    );
     return false;
   }
 
   return true;
 }
 
-/**
- * Valida formato de email
- */
-function isValidEmail(email) {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-}
-
-/**
- * Muestra mensajes al usuario
- */
+// Reutilizar funciones de mensajes (las mismas que en register.js)
 function showMessage(message, type) {
   const messageDiv = document.getElementById("message");
   const color = type === "success" ? "#10b981" : "#ef4444";
@@ -117,17 +118,11 @@ function showMessage(message, type) {
     `;
 }
 
-/**
- * Limpia todos los mensajes
- */
 function clearMessages() {
   const messageDiv = document.getElementById("message");
   messageDiv.innerHTML = "";
 }
 
-/**
- * Controla el estado de carga del botón
- */
 function setButtonLoading(button, isLoading) {
   if (isLoading) {
     button.classList.add("loading");
@@ -138,9 +133,8 @@ function setButtonLoading(button, isLoading) {
   }
 }
 
-// Exportar funciones para testing (opcional)
-window.Register = {
-  handleRegister,
-  validateForm,
-  isValidEmail,
+// Exportar funciones para testing
+window.Password = {
+  handlePasswordChange,
+  validatePasswordForm,
 };
