@@ -1,39 +1,6 @@
 // landing.js - Efectos y animaciones para la página de inicio
 
 /**
- * Crea partículas animadas para el fondo
- */
-function createParticles() {
-  const container = document.getElementById("particles");
-  if (!container) return;
-
-  const colors = ["#ec4899", "#a78bfa", "#f472b6", "#c084fc", "#34d399"];
-
-  for (let i = 0; i < 15; i++) {
-    const particle = document.createElement("div");
-    particle.className = "particle";
-
-    // Configurar estilos de la partícula
-    const size = Math.random() * 6 + 2;
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    const left = Math.random() * 100;
-    const delay = Math.random() * 5;
-    const duration = Math.random() * 10 + 10;
-
-    particle.style.cssText = `
-            width: ${size}px;
-            height: ${size}px;
-            background: ${color};
-            left: ${left}%;
-            animation-delay: ${delay}s;
-            animation-duration: ${duration}s;
-        `;
-
-    container.appendChild(particle);
-  }
-}
-
-/**
  * Efecto de escritura para el título (opcional)
  */
 function typeWriterEffect() {
@@ -146,9 +113,6 @@ function initParallaxEffect() {
 document.addEventListener("DOMContentLoaded", function () {
   console.log("🎬 Inicializando efectos de landing page...");
 
-  // Crear partículas animadas
-  createParticles();
-
   // Efecto de escritura para el título (opcional)
   // typeWriterEffect();
 
@@ -170,17 +134,9 @@ document.addEventListener("DOMContentLoaded", function () {
 /**
  * Función para limpiar partículas (útil si se cambia de página)
  */
-function cleanupParticles() {
-  const container = document.getElementById("particles");
-  if (container) {
-    container.innerHTML = "";
-  }
-}
 
 // Exportar funciones para uso global (si es necesario)
 window.LandingEffects = {
-  createParticles,
-  cleanupParticles,
   animateStats,
   animateFeatureCards,
 };

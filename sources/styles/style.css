@@ -735,6 +735,7 @@ body {
   backdrop-filter: blur(20px);
   animation: fadeInUp 0.8s var(--bounce);
   will-change: transform, opacity;
+  z-index: 9999;
 }
 
 .login-container h1 {
@@ -2483,6 +2484,7 @@ body {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 2.5rem;
   margin: 3rem 0;
+  z-index: 2;
 }
 
 /* Tarjetas de películas en favoritos */

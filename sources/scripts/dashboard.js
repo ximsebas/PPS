@@ -2,7 +2,6 @@
 const API_KEY = "eaa6e858";
 const API_URL = "https://www.omdbapi.com/";
 
-const TRANSLATE_API_URL = "https://api.mymemory.translated.net/get";
 let translationsEnabled = false;
 // Elementos del DOM
 const searchInput = document.getElementById("searchInput");
@@ -169,107 +168,24 @@ window.addToFavorites = async function (
     alert("❌ Error al agregar a favoritos");
   }
 };
-// Función para traducir texto a español (con división de texto largo)
-async function translateToSpanish(text) {
-  console.log(
-    "🔍 Iniciando traducción para texto:",
-    text.substring(0, 50) + "..."
-  );
 
+const translateToSpanish = async (text) => {
   if (!text || text === "Sinopsis no disponible" || text === "No disponible") {
     console.log("⏩ Texto no necesita traducción");
     return text;
   }
 
-  // Si el texto es muy largo, dividirlo y traducir por partes
-  if (text.length > 400) {
-    console.log("📝 Texto largo detectado, dividiendo...");
-    return await translateLongText(text);
-  }
-
-  try {
-    console.log("🌐 Enviando solicitud de traducción...");
-
-    const response = await fetch(
-      `${TRANSLATE_API_URL}?q=${encodeURIComponent(text)}&langpair=en|es`
-    );
-
-    console.log("📨 Respuesta recibida, status:", response.status);
-
-    if (!response.ok) {
-      throw new Error(`Error HTTP: ${response.status}`);
-    }
-
-    const data = await response.json();
-
-    if (data.responseData && data.responseData.translatedText) {
-      console.log("✅ Traducción exitosa");
-      return data.responseData.translatedText;
-    } else {
-      console.warn("⚠️ No se pudo traducir");
-      return text;
-    }
-  } catch (error) {
-    console.error("❌ Error en traducción:", error);
+  if (typeof Translator === "undefined") {
     return text;
   }
-}
+  const translator = await Translator.create({
+    sourceLanguage: "en",
+    targetLanguage: "es",
+  });
 
-// Función auxiliar para textos largos
-async function translateLongText(longText) {
-  try {
-    // Dividir el texto en oraciones
-    const sentences = longText
-      .split(/[.!?]+/)
-      .filter((s) => s.trim().length > 0);
-    let translatedParts = [];
-
-    console.log(`📚 Dividido en ${sentences.length} oraciones`);
-
-    // Traducir cada oración por separado (límite de 5 para no abusar de la API)
-    for (let i = 0; i < Math.min(sentences.length, 5); i++) {
-      const sentence = sentences[i].trim();
-      if (sentence.length > 0) {
-        console.log(
-          `🔄 Traduciendo oración ${i + 1}/${Math.min(sentences.length, 5)}`
-        );
-
-        const response = await fetch(
-          `${TRANSLATE_API_URL}?q=${encodeURIComponent(
-            sentence
-          )}&langpair=en|es`
-        );
-
-        if (response.ok) {
-          const data = await response.json();
-          if (data.responseData && data.responseData.translatedText) {
-            translatedParts.push(data.responseData.translatedText);
-          } else {
-            translatedParts.push(sentence); // Usar original si falla
-          }
-        } else {
-          translatedParts.push(sentence); // Usar original si falla
-        }
-
-        // Pequeña pausa entre solicitudes
-        await new Promise((resolve) => setTimeout(resolve, 300));
-      }
-    }
-
-    // Unir las partes traducidas
-    const result =
-      translatedParts.join(". ") + (sentences.length > 5 ? "..." : "");
-    console.log("✅ Texto largo traducido por partes");
-    return result;
-  } catch (error) {
-    console.error("❌ Error traduciendo texto largo:", error);
-    // Si falla, devolver versión recortada del original
-    return (
-      longText.substring(0, 300) +
-      "... [Texto muy largo - usar versión completa en inglés]"
-    );
-  }
-}
+  const translated = await translator.translate(text);
+  return translated;
+};
 
 // Función para alternar traducción (HACER GLOBAL)
 window.toggleTranslation = async function () {

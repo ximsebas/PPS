@@ -26,6 +26,7 @@ function createParticles(containerId = "particles", count = 12, colors = null) {
 
     // Configuración aleatoria para cada partícula
     const size = Math.random() * 5 + 2;
+    const top = Math.random() * 100 + 1;
     const color =
       particleColors[Math.floor(Math.random() * particleColors.length)];
     const left = Math.random() * 100;
@@ -35,6 +36,7 @@ function createParticles(containerId = "particles", count = 12, colors = null) {
     particle.style.cssText = `
             width: ${size}px;
             height: ${size}px;
+            top: ${top}%;
             background: ${color};
             left: ${left}%;
             animation-delay: ${delay}s;
@@ -63,41 +65,21 @@ function cleanupParticles(containerId = "particles") {
  * Inicializa partículas cuando el DOM está listo
  */
 function initParticles() {
-  createParticles();
-}
-
-/**
- * Crea partículas con configuración específica para diferentes páginas
- */
-function initLoginParticles() {
   const colors = ["#ec4899", "#a78bfa", "#f472b6", "#c084fc"];
-  createParticles("particles", 12, colors);
-}
-
-function initLandingParticles() {
-  const colors = ["#ec4899", "#a78bfa", "#f472b6", "#c084fc", "#34d399"];
-  createParticles("particles", 15, colors);
+  createParticles("particles", 150, colors);
 }
 
 // Inicializar cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", function () {
   // Detectar automáticamente el tipo de página
-  const body = document.body;
-
-  if (body.classList.contains("landing-body")) {
-    initLandingParticles();
-  } else if (body.classList.contains("login-body")) {
-    initLoginParticles();
-  } else {
-    // Inicialización por defecto
-    initParticles();
+  if (!document.getElementById("particles")) {
+    return;
   }
+  // Inicialización por defecto
+  initParticles();
 });
-
 // Exportar funciones para uso global
 window.Particles = {
   create: createParticles,
   cleanup: cleanupParticles,
-  initLogin: initLoginParticles,
-  initLanding: initLandingParticles,
 };
