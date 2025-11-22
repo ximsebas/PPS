@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="sources/styles/style.css" />
   </head>
   <body>
+    <!-- PARTÍCULAS AL FONDO - PRIMER ELEMENTO -->
+    <div class="particles-container" id="particles"></div>
+
     <div class="dashboard-container">
       <header class="dashboard-header">
         <h1>🎬 Buscador de Películas y Series</h1>
@@ -16,7 +19,7 @@
             >🔐 Cambiar Contraseña</a
           >
 
-          <!-- NUEVO COMPONENTE DE USUARIO -->
+          <!-- Componente de Usuario -->
           <div class="user-menu">
             <div class="user-avatar" id="userAvatar">
               <span class="avatar-icon">👤</span>
@@ -60,6 +63,8 @@
       <main class="container">
         <div class="search-section">
           <h2>Buscar Películas y Series</h2>
+          <p>Encuentra tu próximo entretenimiento favorito</p>
+
           <div class="search-box">
             <input
               type="text"
@@ -68,14 +73,34 @@
             />
             <button id="searchBtn">Buscar</button>
           </div>
+
+          <!-- BOTONES DE RECOMENDACIÓN DEL DÍA -->
+          <div class="random-section">
+            <div class="random-buttons-container">
+              <button id="randomMovieBtn" class="btn-favorites random-btn">
+                <span class="btn-icon">🎬</span>
+                Película del Día
+              </button>
+              <button
+                id="randomSeriesBtn"
+                class="btn-favorites random-btn series-btn"
+              >
+                <span class="btn-icon">📺</span>
+                Serie del Día
+              </button>
+            </div>
+            <p class="random-description">
+              ¿No sabes qué ver? Descubre recomendaciones aleatorias
+            </p>
+          </div>
         </div>
 
-        <div id="loading" style="display: none; text-align: center">
-          <p>Buscando películas...</p>
+        <div id="loading" class="loading-state">
+          <p>Buscando...</p>
         </div>
 
         <div id="movies-container" class="movies-grid">
-          <!-- Las películas aparecerán aquí -->
+          <!-- Los resultados aparecerán aquí -->
         </div>
       </main>
     </div>
@@ -89,7 +114,7 @@
         </div>
       </div>
     </div>
-    <div class="particles-container" id="particles"></div>
+
     <script src="sources/scripts/dashboard.js"></script>
     <script src="sources/scripts/particles.js"></script>
   </body>
