@@ -1,30 +1,52 @@
 <?php
-/**
- * =============================================
- * ARCHIVO: database.php
- * DESCRIPCIÓN: Configuración de conexión a base de datos MySQL
- * FUNCIONALIDADES:
- * - Establece conexión PDO con MySQL
- * - Configura manejo de errores
- * - Proporciona objeto $pdo para consultas
- * =============================================
- */
-
-// Configuración de conexión a MySQL
 $host = 'localhost';
-$dbname = 'proyecto_interfacesdb';
-$username = 'root';
-$password = '';  // Por defecto en XAMPP está vacío
+$db   = 'proyecto_interfacesdb';
+$user = 'root';
+$pass = '';
+$charset = 'utf8mb4';
+
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+
+$options = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
 
 try {
-    // Crear conexión PDO (PHP Data Objects)
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $pdo = new PDO($dsn, $user, $pass, $options);
+
+    // Crear tabla usuarios
+    $pdo->exec("
+        CREATE TABLE IF NOT EXISTS usuarios (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            email VARCHAR(255) UNIQUE NOT NULL,
+            password VARCHAR(255) NOT NULL,
+            nombre VARCHAR(255) NOT NULL,
+            fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB;
+    ");
+
+    // Crear tabla usuarios_favoritos
+    $pdo->exec("
+        CREATE TABLE IF NOT EXISTS usuarios_favoritos (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            usuario_id INT NOT NULL,
+            pelicula_id VARCHAR(255),
+            pelicula_titulo VARCHAR(255),
+            poster VARCHAR(255),
+            ano VARCHAR(50),
+            fecha_agregado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB;
+    ");
+
+} catch (\PDOException $e) {
+    http_response_code(500);
+    echo json_encode([
+        "success" => false,
+        "error" => "DB ERROR: " . $e->getMessage()
+    ]);
     
-    // Configurar PDO para mostrar errores
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-    // echo "Conexión exitosa"; // Puedes descomentar para probar
-} catch(PDOException $e) {
-    die("Error de conexión: " . $e->getMessage());
+    exit;
 }
-?>
