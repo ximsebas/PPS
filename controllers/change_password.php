@@ -1,12 +1,25 @@
 <?php
+/**
+ * =============================================
+ * ARCHIVO: change_password.php
+ * DESCRIPCIÓN: Maneja el cambio de contraseña de usuarios
+ * FUNCIONALIDADES:
+ * - Verifica identidad del usuario
+ * - Valida contraseña actual
+ * - Aplica hash a nueva contraseña
+ * - Actualiza credenciales en BD
+ * =============================================
+ */
+
 session_start();
 include 'database.php';
 
+// Headers para API
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Verificar que el usuario está logueado
+    // Verificar autenticación
     if (!isset($_SESSION['user_id'])) {
         echo json_encode(['success' => false, 'message' => 'Debes iniciar sesión']);
         exit;
@@ -16,20 +29,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $currentPassword = $_POST['currentPassword'] ?? '';
     $newPassword = $_POST['newPassword'] ?? '';
 
-    // Validar campos
+    // Validar campos requeridos
     if (empty($currentPassword) || empty($newPassword)) {
         echo json_encode(['success' => false, 'message' => 'Todos los campos son requeridos']);
         exit;
     }
 
-    // Validar longitud de nueva contraseña
+    // Validar seguridad de nueva contraseña
     if (strlen($newPassword) < 6) {
         echo json_encode(['success' => false, 'message' => 'La nueva contraseña debe tener al menos 6 caracteres']);
         exit;
     }
 
     try {
-        // Obtener usuario actual
+        // Obtener datos del usuario actual
         $stmt = $pdo->prepare("SELECT * FROM Usuarios WHERE id = ?");
         $stmt->execute([$user_id]);
         $user = $stmt->fetch();
@@ -45,10 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             exit;
         }
 
-        // Hash de la nueva contraseña
+        // Hash de la nueva contraseña para seguridad
         $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
-        // Actualizar contraseña
+        // Actualizar contraseña en base de datos
         $stmt = $pdo->prepare("UPDATE Usuarios SET password = ? WHERE id = ?");
         
         if ($stmt->execute([$hashedNewPassword, $user_id])) {

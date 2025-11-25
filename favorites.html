@@ -7,12 +7,17 @@
     <link rel="stylesheet" href="sources/styles/style.css" />
   </head>
   <body>
+    <!-- =============================================
+         PÁGINA: Mis Favoritos
+         Muestra la colección personal del usuario
+         ============================================= -->
     <div class="dashboard-container">
+      <!-- Header con navegación -->
       <header class="dashboard-header">
         <h1>❤️ Mis Películas y Series Favoritas</h1>
 
         <div class="user-info">
-          <!-- BOTÓN PARA VOLVER AL BUSCADOR -->
+          <!-- Navegación entre páginas -->
           <a href="dashboard.html" class="btn-favorites btn-back">
             <span class="btn-icon">🔍</span>
             Volver al Buscador
@@ -21,7 +26,7 @@
             >🔐 Cambiar Contraseña</a
           >
 
-          <!-- Componente de Usuario -->
+          <!-- Componente de usuario (igual que dashboard) -->
           <div class="user-menu">
             <div class="user-avatar" id="userAvatar">
               <span class="avatar-icon">👤</span>
@@ -62,15 +67,22 @@
         </div>
       </header>
 
+      <!-- =============================================
+           CONTENIDO: Lista de Favoritos
+           Estados: Cargando, Con contenido, Vacío
+           ============================================= -->
       <main class="container">
+        <!-- Estado de carga -->
         <div id="loading" class="loading-state">
           <p>Cargando favoritos...</p>
         </div>
 
+        <!-- Contenedor para favoritos -->
         <div id="favorites-container" class="movies-grid">
-          <!-- Aquí se mostrarán los favoritos -->
+          <!-- Las películas/series favoritas aparecerán aquí -->
         </div>
 
+        <!-- Estado cuando no hay favoritos -->
         <div id="no-favorites" class="no-favorites-state">
           <h3>No tienes películas o Series favoritas aún</h3>
           <p>¡Ve al buscador y agrega algunas!</p>
@@ -81,7 +93,11 @@
         </div>
       </main>
     </div>
+
+    <!-- Fondo animado -->
     <div class="particles-container" id="particles"></div>
+
+    <!-- Scripts específicos de favoritos -->
     <script src="sources/scripts/favorites.js"></script>
     <script src="sources/scripts/particles.js"></script>
   </body>

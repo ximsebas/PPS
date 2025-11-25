@@ -1,8 +1,20 @@
 <?php
+/**
+ * =============================================
+ * ARCHIVO: register.php
+ * DESCRIPCIÓN: Maneja el registro de nuevos usuarios
+ * FUNCIONALIDADES:
+ * - Valida datos de registro
+ * - Verifica duplicados de email
+ * - Aplica hash a contraseñas
+ * - Inicia sesión automáticamente
+ * =============================================
+ */
+
 session_start();
 include 'database.php';
 
-// Permitir CORS (para desarrollo)
+// Headers para desarrollo
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
@@ -18,20 +30,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit;
     }
     
-    // Verificar si el usuario ya existe
+    // Verificar si el usuario ya existe (email único)
     $stmt = $pdo->prepare("SELECT id FROM Usuarios WHERE email = ?");
     $stmt->execute([$email]);
     
     if ($stmt->rowCount() > 0) {
         echo json_encode(['success' => false, 'message' => 'El email ya está registrado']);
     } else {
-        // Hash de la contraseña
+        // Hash de la contraseña para seguridad
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         
-        // Insertar nuevo usuario
+        // Insertar nuevo usuario en base de datos
         $stmt = $pdo->prepare("INSERT INTO Usuarios (email, password, nombre) VALUES (?, ?, ?)");
         
         if ($stmt->execute([$email, $hashedPassword, $nombre])) {
+            // Iniciar sesión automáticamente después del registro
             $_SESSION['user_id'] = $pdo->lastInsertId();
             $_SESSION['user_email'] = $email;
             $_SESSION['user_name'] = $nombre;

@@ -1,3 +1,15 @@
+/**
+ * =============================================
+ * ARCHIVO: register.js
+ * DESCRIPCIÓN: Gestión del formulario de registro de usuarios
+ * FUNCIONALIDADES:
+ * - Validación de datos en frontend
+ * - Registro mediante API
+ * - Manejo de estados de carga
+ * - Redirección automática tras registro
+ * =============================================
+ */
+
 // register.js - Manejo del formulario de registro
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -11,6 +23,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 /**
  * Maneja el envío del formulario de registro
+ * @async
+ * @param {Event} e - Evento de submit del formulario
  */
 async function handleRegister(e) {
   e.preventDefault();
@@ -62,7 +76,11 @@ async function handleRegister(e) {
 }
 
 /**
- * Valida los datos del formulario
+ * Valida los datos del formulario de registro
+ * @param {string} nombre - Nombre del usuario
+ * @param {string} email - Email del usuario
+ * @param {string} password - Contraseña del usuario
+ * @returns {boolean} - True si la validación es exitosa
  */
 function validateForm(nombre, email, password) {
   clearMessages();
@@ -87,6 +105,8 @@ function validateForm(nombre, email, password) {
 
 /**
  * Valida formato de email
+ * @param {string} email - Email a validar
+ * @returns {boolean} - True si el email es válido
  */
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -94,7 +114,9 @@ function isValidEmail(email) {
 }
 
 /**
- * Muestra mensajes al usuario
+ * Muestra mensajes de feedback al usuario
+ * @param {string} message - Texto del mensaje
+ * @param {string} type - Tipo de mensaje ('success' o 'error')
  */
 function showMessage(message, type) {
   const messageDiv = document.getElementById("message");
@@ -118,7 +140,7 @@ function showMessage(message, type) {
 }
 
 /**
- * Limpia todos los mensajes
+ * Limpia todos los mensajes de la interfaz
  */
 function clearMessages() {
   const messageDiv = document.getElementById("message");
@@ -126,7 +148,9 @@ function clearMessages() {
 }
 
 /**
- * Controla el estado de carga del botón
+ * Controla el estado de carga del botón de envío
+ * @param {HTMLElement} button - Elemento del botón
+ * @param {boolean} isLoading - Estado de carga
  */
 function setButtonLoading(button, isLoading) {
   if (isLoading) {
@@ -138,7 +162,7 @@ function setButtonLoading(button, isLoading) {
   }
 }
 
-// Exportar funciones para testing (opcional)
+// Exportar funciones para testing
 window.Register = {
   handleRegister,
   validateForm,

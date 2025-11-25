@@ -7,10 +7,16 @@
     <link rel="stylesheet" href="sources/styles/style.css" />
   </head>
   <body class="login-body">
+    <!-- =============================================
+         PÁGINA: Registro de Usuario
+         Creación de nuevas cuentas
+         ============================================= -->
+
     <!-- Fondo animado -->
     <div class="particles-container" id="particles"></div>
 
     <div class="login-container">
+      <!-- Header con logo -->
       <div class="login-header">
         <div class="logo">
           <span class="logo-icon">🎬</span>
@@ -18,10 +24,15 @@
         </div>
       </div>
 
+      <!-- =============================================
+           TARJETA: Formulario de Registro
+           Campos para crear nueva cuenta
+           ============================================= -->
       <div class="login-card">
         <h1>Crear Cuenta</h1>
         <p class="login-subtitle">Únete a nuestra comunidad cinéfila</p>
 
+        <!-- Formulario de registro -->
         <form id="registerForm">
           <div class="form-group">
             <label for="nombre">Nombre:</label>
@@ -55,6 +66,7 @@
             />
           </div>
 
+          <!-- Botón de envío -->
           <button type="submit" class="btn-login">
             <span class="btn-icon">⭐</span>
             <span class="btn-text">Crear Cuenta</span>
@@ -62,6 +74,7 @@
           </button>
         </form>
 
+        <!-- Enlaces de navegación -->
         <div class="login-links">
           <p>
             ¿Ya tienes cuenta?
@@ -70,10 +83,12 @@
           <a href="index.html" class="back-link">← Volver al inicio</a>
         </div>
 
+        <!-- Contenedor para mensajes -->
         <div id="message"></div>
       </div>
     </div>
 
+    <!-- Scripts específicos para registro -->
     <script src="sources/scripts/register.js"></script>
     <script src="sources/scripts/particles.js"></script>
   </body>

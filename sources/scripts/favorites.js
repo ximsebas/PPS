@@ -1,6 +1,22 @@
+/**
+ * =============================================
+ * ARCHIVO: Favorites.js
+ * DESCRIPCIÓN: Gestión de la página de favoritos del usuario
+ * FUNCIONALIDADES:
+ * - Verificación de sesión y autenticación
+ * - Carga y visualización de películas/series favoritas
+ * - Eliminación de favoritos
+ * - Actualización de interfaz de usuario
+ * =============================================
+ */
+
 // favorites.js - Manejo de la página de favoritos
 
-// Función para verificar sesión y cargar información del usuario
+/**
+ * Verifica la sesión del usuario y carga información del perfil
+ * @async
+ * @returns {Promise<boolean>} - True si el usuario está autenticado
+ */
 async function checkSession() {
   try {
     const response = await fetch("controllers/check_session.php");
@@ -14,10 +30,8 @@ async function checkSession() {
 
     // Actualizar información del usuario en el header
     if (result.user_name) {
-      // Actualizar nombre en el header principal
       document.getElementById("userName").textContent = result.user_name;
 
-      // Actualizar nombre en el dropdown
       const dropdownUserName = document.getElementById("dropdownUserName");
       if (dropdownUserName) {
         dropdownUserName.textContent = result.user_name;
@@ -42,7 +56,10 @@ async function checkSession() {
   }
 }
 
-// Función para generar avatar con iniciales
+/**
+ * Genera avatar del usuario con sus iniciales
+ * @param {string} userName - Nombre completo del usuario
+ */
 function updateUserAvatar(userName) {
   const avatar = document.getElementById("userAvatar");
   const profileAvatar = document.querySelector(".profile-avatar");
@@ -65,7 +82,11 @@ function updateUserAvatar(userName) {
   }
 }
 
-// Función para obtener iniciales del nombre
+/**
+ * Extrae las iniciales de un nombre completo
+ * @param {string} fullName - Nombre completo del usuario
+ * @returns {string} - Iniciales (máximo 2 caracteres)
+ */
 function getUserInitials(fullName) {
   return fullName
     .split(" ")
@@ -74,12 +95,16 @@ function getUserInitials(fullName) {
     .substring(0, 2);
 }
 
-// Función para cargar favoritos
+/**
+ * Carga la lista de favoritos del usuario desde el servidor
+ * @async
+ */
 async function loadFavorites() {
   const loading = document.getElementById("loading");
   const favoritesContainer = document.getElementById("favorites-container");
   const noFavorites = document.getElementById("no-favorites");
 
+  // Mostrar estado de carga
   loading.style.display = "block";
   favoritesContainer.innerHTML = "";
   noFavorites.style.display = "none";
@@ -105,13 +130,16 @@ async function loadFavorites() {
   }
 }
 
-// Función para mostrar favoritos
+/**
+ * Renderiza la lista de favoritos en el contenedor
+ * @param {Array} favorites - Array de objetos de favoritos
+ */
 function displayFavorites(favorites) {
   const favoritesContainer = document.getElementById("favorites-container");
 
   favoritesContainer.innerHTML = favorites
     .map((favorite) => {
-      // Validar y limpiar datos
+      // Validar y limpiar datos para seguridad
       const safeId = favorite.id || favorite.favorite_id || 0;
       const safeTitle =
         favorite.pelicula_titulo || favorite.movie_title || "Sin título";
@@ -147,7 +175,11 @@ function displayFavorites(favorites) {
     .join("");
 }
 
-// Función para eliminar de favoritos
+/**
+ * Elimina una película/serie de la lista de favoritos
+ * @async
+ * @param {number} favoriteId - ID del favorito a eliminar
+ */
 async function removeFromFavorites(favoriteId) {
   if (
     !confirm(
@@ -180,7 +212,10 @@ async function removeFromFavorites(favoriteId) {
   }
 }
 
-// Función opcional para mostrar contador de favoritos
+/**
+ * Actualiza el contador de favoritos en la interfaz
+ * @param {number} count - Número total de favoritos
+ */
 function updateFavoritesCount(count) {
   const headerTitle = document.querySelector(".dashboard-header h1");
   const existingCount = document.querySelector(".favorites-count");

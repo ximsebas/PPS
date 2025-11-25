@@ -7,10 +7,16 @@
     <link rel="stylesheet" href="sources/styles/style.css" />
   </head>
   <body class="login-body">
+    <!-- =============================================
+         PÁGINA: Inicio de Sesión
+         Autenticación de usuarios existentes
+         ============================================= -->
+
     <!-- Fondo animado -->
     <div class="particles-container" id="particles"></div>
 
     <div class="login-container">
+      <!-- Header con logo -->
       <div class="login-header">
         <div class="logo">
           <span class="logo-icon">🎬</span>
@@ -18,10 +24,15 @@
         </div>
       </div>
 
+      <!-- =============================================
+           TARJETA: Formulario de Login
+           Contiene campos de email y contraseña
+           ============================================= -->
       <div class="login-card">
         <h1>Iniciar Sesión</h1>
         <p class="login-subtitle">Bienvenido de vuelta</p>
 
+        <!-- Formulario de login -->
         <form id="loginForm">
           <div class="form-group">
             <label for="email">Email:</label>
@@ -44,6 +55,7 @@
             />
           </div>
 
+          <!-- Botón de envío con estados de carga -->
           <button type="submit" class="btn-login">
             <span class="btn-icon">🚀</span>
             <span class="btn-text">Ingresar</span>
@@ -51,6 +63,7 @@
           </button>
         </form>
 
+        <!-- Enlaces de navegación -->
         <div class="login-links">
           <p>
             ¿No tienes cuenta?
@@ -59,10 +72,12 @@
           <a href="index.html" class="back-link">← Volver al inicio</a>
         </div>
 
+        <!-- Contenedor para mensajes de feedback -->
         <div id="message"></div>
       </div>
     </div>
 
+    <!-- Scripts (incluye jQuery para compatibilidad) -->
     <script src="sources/lib/jquery/jquery.js"></script>
     <script src="sources/scripts/login.js"></script>
     <script src="sources/scripts/particles.js"></script>

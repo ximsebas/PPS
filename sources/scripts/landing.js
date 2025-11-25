@@ -1,7 +1,20 @@
+/**
+ * =============================================
+ * ARCHIVO: landing.js
+ * DESCRIPCIÓN: Efectos visuales y animaciones para la página de inicio
+ * FUNCIONALIDADES:
+ * - Animaciones de entrada para elementos
+ * - Efectos de hover mejorados
+ * - Contadores animados para estadísticas
+ * - Efectos de parallax (opcional)
+ * =============================================
+ */
+
 // landing.js - Efectos y animaciones para la página de inicio
 
 /**
- * Efecto de escritura para el título (opcional)
+ * Efecto de máquina de escribir para el título principal
+ * @function
  */
 function typeWriterEffect() {
   const title = document.querySelector(".hero-title .gradient-text");
@@ -24,7 +37,8 @@ function typeWriterEffect() {
 }
 
 /**
- * Animación de contador para las estadísticas
+ * Anima los contadores numéricos de las estadísticas
+ * @function
  */
 function animateStats() {
   const statNumbers = document.querySelectorAll(".stat-number");
@@ -41,7 +55,9 @@ function animateStats() {
 }
 
 /**
- * Animación de contador numérico
+ * Animación incremental para números
+ * @param {HTMLElement} element - Elemento HTML a animar
+ * @param {number} target - Valor final del contador
  */
 function animateCounter(element, target) {
   let current = 0;
@@ -58,7 +74,8 @@ function animateCounter(element, target) {
 }
 
 /**
- * Efecto de aparición escalonada para las tarjetas de características
+ * Efecto de aparición escalonada para tarjetas de características
+ * @function
  */
 function animateFeatureCards() {
   const featureCards = document.querySelectorAll(".feature-card");
@@ -77,7 +94,8 @@ function animateFeatureCards() {
 }
 
 /**
- * Efecto de hover mejorado para los botones
+ * Mejora los efectos hover de los botones
+ * @function
  */
 function enhanceButtonHover() {
   const buttons = document.querySelectorAll(".btn");
@@ -94,7 +112,8 @@ function enhanceButtonHover() {
 }
 
 /**
- * Efecto de parallax para el fondo (opcional)
+ * Efecto de parallax para elementos de fondo
+ * @function
  */
 function initParallaxEffect() {
   window.addEventListener("scroll", function () {
@@ -108,7 +127,7 @@ function initParallaxEffect() {
 }
 
 /**
- * Inicializar todos los efectos cuando el DOM esté listo
+ * Inicializa todos los efectos cuando el DOM esté listo
  */
 document.addEventListener("DOMContentLoaded", function () {
   console.log("🎬 Inicializando efectos de landing page...");
@@ -131,11 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("✅ Efectos de landing page inicializados correctamente");
 });
 
-/**
- * Función para limpiar partículas (útil si se cambia de página)
- */
-
-// Exportar funciones para uso global (si es necesario)
+// Exportar funciones para uso global
 window.LandingEffects = {
   animateStats,
   animateFeatureCards,

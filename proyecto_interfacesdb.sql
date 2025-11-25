@@ -1,3 +1,12 @@
+-- =============================================
+-- ARCHIVO: proyecto_interfacesdb.sql
+-- DESCRIPCIÓN: Script de creación de base de datos del sistema
+-- FUNCIONALIDADES:
+-- - Crea estructura de tablas para usuarios y favoritos
+-- - Define relaciones y restricciones
+-- - Incluye datos de ejemplo para testing
+-- =============================================
+
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
@@ -21,11 +30,11 @@ SET time_zone = "+00:00";
 -- Base de datos: `proyecto_interfacesdb`
 --
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuarios`
---
+-- =============================================
+-- TABLA: usuarios
+-- Almacena información de usuarios registrados
+-- Campos: id, email, password (hash), nombre, fecha_creacion
+-- =============================================
 
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
@@ -37,6 +46,7 @@ CREATE TABLE `usuarios` (
 
 --
 -- Volcado de datos para la tabla `usuarios`
+-- Datos de ejemplo para testing del sistema
 --
 
 INSERT INTO `usuarios` (`id`, `email`, `password`, `nombre`, `fecha_creacion`) VALUES
@@ -44,11 +54,12 @@ INSERT INTO `usuarios` (`id`, `email`, `password`, `nombre`, `fecha_creacion`) V
 (2, 'prueba2@test.com', '$2y$10$ySVO0NdiCIiSMoJMtUXPYOip7hUsUtdWxhdT7wjKeCxwEOYHnwKKG', 'Aylu Lucero', '2025-11-07 02:55:54'),
 (3, 'prueba3@test.com', '$2y$10$.ujG/HIVhGrO/GBXVhyyUeOTJHrrh.fp3y9vCXFfF4VIeZ0r3usEW', 'Seba Sanas', '2025-11-07 22:37:01');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuarios_favoritos`
---
+-- =============================================
+-- TABLA: usuarios_favoritos
+-- Relación muchos-a-uno con usuarios
+-- Almacena películas/series favoritas de cada usuario
+-- Campos: id, usuario_id (FK), pelicula_id, pelicula_titulo, poster, ano, fecha_agregado
+-- =============================================
 
 CREATE TABLE `usuarios_favoritos` (
   `id` int(11) NOT NULL,
@@ -62,6 +73,7 @@ CREATE TABLE `usuarios_favoritos` (
 
 --
 -- Volcado de datos para la tabla `usuarios_favoritos`
+-- Ejemplos de películas/series agregadas como favoritos
 --
 
 INSERT INTO `usuarios_favoritos` (`id`, `usuario_id`, `pelicula_id`, `pelicula_titulo`, `poster`, `ano`, `fecha_agregado`) VALUES
@@ -90,6 +102,7 @@ INSERT INTO `usuarios_favoritos` (`id`, `usuario_id`, `pelicula_id`, `pelicula_t
 
 --
 -- Indices de la tabla `usuarios`
+-- Clave primaria y índice único en email
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
@@ -97,6 +110,7 @@ ALTER TABLE `usuarios`
 
 --
 -- Indices de la tabla `usuarios_favoritos`
+-- Clave primaria y clave foránea a usuarios
 --
 ALTER TABLE `usuarios_favoritos`
   ADD PRIMARY KEY (`id`),
@@ -124,6 +138,7 @@ ALTER TABLE `usuarios_favoritos`
 
 --
 -- Filtros para la tabla `usuarios_favoritos`
+-- Integridad referencial: eliminar favoritos si se elimina usuario
 --
 ALTER TABLE `usuarios_favoritos`
   ADD CONSTRAINT `usuarios_favoritos_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`);

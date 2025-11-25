@@ -1,3 +1,15 @@
+/**
+ * =============================================
+ * ARCHIVO: particles.js
+ * DESCRIPCIÓN: Sistema de partículas animadas para fondos
+ * FUNCIONALIDADES:
+ * - Creación de partículas dinámicas
+ * - Configuración de colores y cantidades
+ * - Animaciones automáticas
+ * - Limpieza de recursos
+ * =============================================
+ */
+
 // particles.js - Sistema de partículas reutilizable para todas las páginas
 
 /**
@@ -62,7 +74,7 @@ function cleanupParticles(containerId = "particles") {
 }
 
 /**
- * Inicializa partículas cuando el DOM está listo
+ * Inicializa partículas con configuración por defecto
  */
 function initParticles() {
   const colors = ["#ec4899", "#a78bfa", "#f472b6", "#c084fc"];
@@ -78,6 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Inicialización por defecto
   initParticles();
 });
+
 // Exportar funciones para uso global
 window.Particles = {
   create: createParticles,

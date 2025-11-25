@@ -1,3 +1,15 @@
+/**
+ * =============================================
+ * ARCHIVO: Login.js
+ * DESCRIPCIÓN: Manejo del formulario de inicio de sesión
+ * FUNCIONALIDADES:
+ * - Validación de campos en frontend
+ * - Autenticación mediante AJAX
+ * - Manejo de estados de carga
+ * - Redirección tras login exitoso
+ * =============================================
+ */
+
 // login.js - Manejo del formulario de login
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -6,12 +18,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const loginForm = document.getElementById("loginForm");
   if (!loginForm) return;
 
-  // Usar jQuery para compatibilidad con tu código existente
+  // Usar jQuery para compatibilidad con código existente
   $(loginForm).on("submit", handleLogin);
 });
 
 /**
  * Maneja el envío del formulario de login
+ * @param {Event} e - Evento de submit del formulario
  */
 function handleLogin(e) {
   e.preventDefault();
@@ -29,7 +42,7 @@ function handleLogin(e) {
   setButtonLoading(submitBtn, true);
   clearMessages();
 
-  // Usar jQuery para la petición AJAX (como en tu código original)
+  // Usar jQuery para la petición AJAX
   $.ajax({
     type: "POST",
     url: "controllers/login.php",
@@ -58,6 +71,9 @@ function handleLogin(e) {
 
 /**
  * Valida los datos del formulario de login
+ * @param {string} email - Email del usuario
+ * @param {string} password - Contraseña del usuario
+ * @returns {boolean} - True si la validación es exitosa
  */
 function validateLoginForm(email, password) {
   clearMessages();
@@ -76,7 +92,9 @@ function validateLoginForm(email, password) {
 }
 
 /**
- * Valida formato de email
+ * Valida formato de email usando expresión regular
+ * @param {string} email - Email a validar
+ * @returns {boolean} - True si el email es válido
  */
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -84,7 +102,9 @@ function isValidEmail(email) {
 }
 
 /**
- * Muestra mensajes al usuario
+ * Muestra mensajes de feedback al usuario
+ * @param {string} message - Texto del mensaje
+ * @param {string} type - Tipo de mensaje ('success' o 'error')
  */
 function showMessage(message, type) {
   const messageDiv = document.getElementById("message");
@@ -108,7 +128,7 @@ function showMessage(message, type) {
 }
 
 /**
- * Limpia todos los mensajes
+ * Limpia todos los mensajes de la interfaz
  */
 function clearMessages() {
   const messageDiv = document.getElementById("message");
@@ -116,7 +136,9 @@ function clearMessages() {
 }
 
 /**
- * Controla el estado de carga del botón
+ * Controla el estado de carga del botón de envío
+ * @param {HTMLElement} button - Elemento del botón
+ * @param {boolean} isLoading - Estado de carga
  */
 function setButtonLoading(button, isLoading) {
   if (isLoading) {
@@ -149,7 +171,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // fillTestCredentials();
 });
 
-// Exportar funciones para testing (opcional)
+// Exportar funciones para testing
 window.Login = {
   handleLogin,
   validateLoginForm,

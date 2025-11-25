@@ -1,3 +1,15 @@
+/**
+ * =============================================
+ * ARCHIVO: password.js
+ * DESCRIPCIÓN: Gestión del formulario de cambio de contraseña
+ * FUNCIONALIDADES:
+ * - Validación de contraseñas en frontend
+ * - Verificación de seguridad
+ * - Actualización mediante API
+ * - Manejo de feedback al usuario
+ * =============================================
+ */
+
 // password.js - Manejo del formulario de cambio de contraseña
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -10,7 +22,9 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /**
- * Maneja el cambio de contraseña
+ * Maneja el proceso de cambio de contraseña
+ * @async
+ * @param {Event} e - Evento de submit del formulario
  */
 async function handlePasswordChange(e) {
   e.preventDefault();
@@ -63,6 +77,10 @@ async function handlePasswordChange(e) {
 
 /**
  * Valida el formulario de cambio de contraseña
+ * @param {string} currentPassword - Contraseña actual
+ * @param {string} newPassword - Nueva contraseña
+ * @param {string} confirmPassword - Confirmación de nueva contraseña
+ * @returns {boolean} - True si la validación es exitosa
  */
 function validatePasswordForm(currentPassword, newPassword, confirmPassword) {
   clearMessages();
