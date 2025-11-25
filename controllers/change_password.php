@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     try {
         // Obtener datos del usuario actual
-        $stmt = $pdo->prepare("SELECT * FROM Usuarios WHERE id = ?");
+        $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE id = ?");
         $stmt->execute([$user_id]);
         $user = $stmt->fetch();
 
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
 
         // Actualizar contraseña en base de datos
-        $stmt = $pdo->prepare("UPDATE Usuarios SET password = ? WHERE id = ?");
+        $stmt = $pdo->prepare("UPDATE usuarios SET password = ? WHERE id = ?");
         
         if ($stmt->execute([$hashedNewPassword, $user_id])) {
             echo json_encode(['success' => true, 'message' => 'Contraseña cambiada exitosamente']);

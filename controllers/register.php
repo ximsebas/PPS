@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     
     // Verificar si el usuario ya existe (email único)
-    $stmt = $pdo->prepare("SELECT id FROM Usuarios WHERE email = ?");
+    $stmt = $pdo->prepare("SELECT id FROM usuarios WHERE email = ?");
     $stmt->execute([$email]);
     
     if ($stmt->rowCount() > 0) {
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         
         // Insertar nuevo usuario en base de datos
-        $stmt = $pdo->prepare("INSERT INTO Usuarios (email, password, nombre) VALUES (?, ?, ?)");
+        $stmt = $pdo->prepare("INSERT INTO usuarios (email, password, nombre) VALUES (?, ?, ?)");
         
         if ($stmt->execute([$email, $hashedPassword, $nombre])) {
             // Iniciar sesión automáticamente después del registro

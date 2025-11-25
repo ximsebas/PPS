@@ -25,7 +25,7 @@
  * @constant {string} API_KEY - Clave para acceder a la API
  * @constant {string} API_URL - Endpoint base de la API
  */
-const API_KEY = "eaa6e858";
+const API_KEY = "9672c5f5";
 const API_URL = "https://www.omdbapi.com/";
 
 /**
@@ -211,34 +211,61 @@ const POPULAR_CURRENT_SERIES = [
  * @returns {Promise<void>}
  */
 async function searchMovies(query) {
+  console.log("🔍 ===== INICIANDO BÚSQUEDA =====");
+  console.log("🔍 Término de búsqueda:", query);
+  console.log("🔍 API Key actual:", API_KEY);
+
   clearPopularSection();
 
   if (!query.trim()) {
+    console.log("❌ Búsqueda vacía");
     showMessage("Por favor ingresa un término de búsqueda");
     return;
   }
 
+  console.log("🔄 Mostrando loading...");
   loading.style.display = "block";
   moviesContainer.innerHTML = "";
 
   try {
-    const response = await fetch(
-      `${API_URL}?apikey=${API_KEY}&s=${encodeURIComponent(query)}`
-    );
-    const data = await response.json();
+    const url = `${API_URL}?apikey=${API_KEY}&s=${encodeURIComponent(query)}`;
+    console.log("🌐 URL de petición:", url);
 
+    console.log("📡 Haciendo fetch...");
+    const response = await fetch(url);
+    console.log("✅ Fetch completado");
+    console.log("📡 Status:", response.status);
+    console.log("📡 OK?:", response.ok);
+
+    console.log("📊 Parseando JSON...");
+    const data = await response.json();
+    console.log("✅ JSON parseado correctamente");
+    console.log("📊 Respuesta completa:", data);
+
+    console.log("🔄 Ocultando loading...");
     loading.style.display = "none";
 
     if (data.Response === "True") {
+      console.log("🎉 ÉXITO! Resultados encontrados:", data.Search.length);
+      console.log("📝 Primer resultado:", data.Search[0]);
+
+      console.log("🔄 Llamando a displayMovies...");
       displayMovies(data.Search);
+      console.log("✅ displayMovies completado");
     } else {
-      showMessage("❌ No se encontraron películas. Intenta con otro nombre.");
+      console.log("❌ Error en respuesta API:", data.Error);
+      showMessage("❌ " + (data.Error || "No se encontraron películas"));
     }
   } catch (error) {
+    console.error("💥 ERROR CAPTURADO:", error);
+    console.error("💥 Mensaje de error:", error.message);
+    console.error("💥 Stack trace:", error.stack);
+
     loading.style.display = "none";
     showMessage("❌ Error al buscar películas. Revisa tu conexión.");
-    console.error("Error:", error);
   }
+
+  console.log("🔍 ===== BÚSQUEDA FINALIZADA =====");
 }
 
 /**
@@ -390,30 +417,58 @@ async function getRandomSeries() {
  * @param {Array} movies - Array de objetos de películas
  */
 function displayMovies(movies) {
-  moviesContainer.innerHTML = movies
-    .map((movie) => {
-      const safeMovieId = movie.imdbID || "unknown";
-      const safeTitle = movie.Title || "Sin título";
-      const safePoster =
-        movie.Poster !== "N/A"
-          ? movie.Poster
-          : "https://via.placeholder.com/300x450/cccccc/666666?text=Poster+No+Disponible";
-      const safeYear = movie.Year || "N/A";
-      const safeType = movie.Type || "movie";
+  console.log("🎬 ===== INICIANDO DISPLAY MOVIES =====");
+  console.log("🎬 Número de películas a mostrar:", movies.length);
 
-      return `
-            <div class="movie-card" onclick="showMovieDetails('${safeMovieId}')">
-                <img src="${safePoster}" alt="${safeTitle}" onerror="this.src='https://via.placeholder.com/300x450/cccccc/666666?text=Poster+No+Disponible'">
-                <h3>${safeTitle}</h3>
-                <p><strong>Año:</strong> ${safeYear}</p>
-                <p><strong>Tipo:</strong> ${safeType}</p>
-                <button class="btn-favorite" onclick="event.stopPropagation(); addToFavorites('${safeMovieId}', '${safeTitle}', '${safePoster}', '${safeYear}')">
-                    ❤️ Agregar a Favoritos
-                </button>
-            </div>
+  if (!movies || movies.length === 0) {
+    console.log("❌ No hay películas para mostrar");
+    moviesContainer.innerHTML =
+      '<div class="message">No se encontraron resultados</div>';
+    return;
+  }
+
+  try {
+    console.log("🔄 Generando HTML...");
+    const moviesHTML = movies
+      .map((movie, index) => {
+        console.log(`🎬 Procesando película ${index + 1}:`, movie.Title);
+
+        const safeMovieId = movie.imdbID || "unknown";
+        const safeTitle = movie.Title || "Sin título";
+        const safePoster =
+          movie.Poster !== "N/A"
+            ? movie.Poster
+            : "https://via.placeholder.com/300x450/cccccc/666666?text=Poster+No+Disponible";
+        const safeYear = movie.Year || "N/A";
+        const safeType = movie.Type || "movie";
+
+        return `
+          <div class="movie-card" onclick="showMovieDetails('${safeMovieId}')">
+            <img src="${safePoster}" alt="${safeTitle}" onerror="this.src='https://via.placeholder.com/300x450/cccccc/666666?text=Poster+No+Disponible'">
+            <h3>${safeTitle}</h3>
+            <p><strong>Año:</strong> ${safeYear}</p>
+            <p><strong>Tipo:</strong> ${safeType}</p>
+            <button class="btn-favorite" onclick="event.stopPropagation(); addToFavorites('${safeMovieId}', '${safeTitle}', '${safePoster}', '${safeYear}')">
+              ❤️ Agregar a Favoritos
+            </button>
+          </div>
         `;
-    })
-    .join("");
+      })
+      .join("");
+
+    console.log("✅ HTML generado correctamente");
+    console.log("🔄 Insertando en el DOM...");
+
+    moviesContainer.innerHTML = moviesHTML;
+    console.log("✅ Contenido insertado en el DOM");
+  } catch (error) {
+    console.error("💥 ERROR en displayMovies:", error);
+    console.error("💥 Mensaje:", error.message);
+    moviesContainer.innerHTML =
+      '<div class="message">Error al mostrar los resultados</div>';
+  }
+
+  console.log("🎬 ===== DISPLAY MOVIES FINALIZADO =====");
 }
 
 /**

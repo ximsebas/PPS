@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     
     // Buscar usuario en base de datos
-    $stmt = $pdo->prepare("SELECT * FROM Usuarios WHERE email = ?");
+    $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE email = ?");
     $stmt->execute([$email]);
     $user = $stmt->fetch();
     
