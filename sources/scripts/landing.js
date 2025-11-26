@@ -6,7 +6,6 @@
  * - Animaciones de entrada para elementos
  * - Efectos de hover mejorados
  * - Contadores animados para estadísticas
- * - Efectos de parallax (opcional)
  * =============================================
  */
 
@@ -130,13 +129,7 @@ function initParallaxEffect() {
  * Inicializa todos los efectos cuando el DOM esté listo
  */
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("🎬 Inicializando efectos de landing page...");
-
-  // Efecto de escritura para el título (opcional)
-  // typeWriterEffect();
-
-  // Animación de estadísticas
-  // animateStats();
+  console.log(" Inicializando efectos de landing page...");
 
   // Animación de tarjetas de características
   animateFeatureCards();
@@ -144,10 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Mejorar efectos hover de botones
   enhanceButtonHover();
 
-  // Efecto parallax (opcional)
-  // initParallaxEffect();
-
-  console.log("✅ Efectos de landing page inicializados correctamente");
+  console.log(" Efectos de landing page inicializados correctamente");
 });
 
 // Exportar funciones para uso global

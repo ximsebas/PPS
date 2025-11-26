@@ -117,7 +117,6 @@ async function loadFavorites() {
 
     if (result.success && result.favorites && result.favorites.length > 0) {
       displayFavorites(result.favorites);
-      // Opcional: Actualizar contador en el header
       updateFavoritesCount(result.favorites.length);
     } else {
       noFavorites.style.display = "block";
@@ -125,7 +124,7 @@ async function loadFavorites() {
   } catch (error) {
     loading.style.display = "none";
     favoritesContainer.innerHTML =
-      '<div class="message">❌ Error al cargar favoritos</div>';
+      '<div class="message"> Error al cargar favoritos</div>';
     console.error("Error:", error);
   }
 }
@@ -217,7 +216,7 @@ async function removeFromFavorites(favoriteId) {
  * @param {number} count - Número total de favoritos
  */
 function updateFavoritesCount(count) {
-  const headerTitle = document.querySelector(".dashboard-header h1");
+  const headerTitle = document.querySelector(".dashboard-header");
   const existingCount = document.querySelector(".favorites-count");
 
   if (existingCount) {

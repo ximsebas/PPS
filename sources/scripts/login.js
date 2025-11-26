@@ -79,12 +79,12 @@ function validateLoginForm(email, password) {
   clearMessages();
 
   if (!email || !password) {
-    showMessage("❌ Todos los campos son requeridos", "error");
+    showMessage("Todos los campos son requeridos", "error");
     return false;
   }
 
   if (!isValidEmail(email)) {
-    showMessage("❌ Ingresa un email válido", "error");
+    showMessage("Ingresa un email válido", "error");
     return false;
   }
 
@@ -149,27 +149,6 @@ function setButtonLoading(button, isLoading) {
     button.disabled = false;
   }
 }
-
-/**
- * Función para autocompletar campos de prueba (solo desarrollo)
- */
-function fillTestCredentials() {
-  // Solo en desarrollo - remover en producción
-  if (
-    window.location.hostname === "localhost" ||
-    window.location.hostname === "127.0.0.1"
-  ) {
-    document.getElementById("email").value = "test@example.com";
-    document.getElementById("password").value = "password123";
-    console.log("🔧 Credenciales de prueba cargadas (solo desarrollo)");
-  }
-}
-
-// Inicializar cuando el DOM esté listo
-document.addEventListener("DOMContentLoaded", function () {
-  // Opcional: Autocompletar credenciales de prueba en desarrollo
-  // fillTestCredentials();
-});
 
 // Exportar funciones para testing
 window.Login = {

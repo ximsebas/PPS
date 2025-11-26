@@ -7,7 +7,6 @@
  * - Valida credenciales de usuario
  * - Verifica contraseña con hash
  * - Inicia sesión PHP
- * - Retorna resultado de autenticación
  * =============================================
  */
 

@@ -1,4 +1,4 @@
-/*! jQuery v3.7.1 | (c) OpenJS Foundation and other contributors | jquery.org/license */ /*!
+/*
  * =============================================
  * ARCHIVO: jquery.js (v3.7.1)
  * DESCRIPCIÓN: Librería jQuery para manipulación DOM y AJAX
@@ -7,8 +7,7 @@
  * - Simplificación de selectores y eventos
  * - Soporte para peticiones AJAX
  * =============================================
- *
- * jQuery v3.7.1 | (c) OpenJS Foundation and other contributors | jquery.org/license
+
  */
 
 !(function (e, t) {

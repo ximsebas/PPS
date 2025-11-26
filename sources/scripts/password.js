@@ -65,11 +65,11 @@ async function handlePasswordChange(e) {
         window.location.href = "dashboard.html";
       }, 2000);
     } else {
-      showMessage("❌ " + result.message, "error");
+      showMessage(" " + result.message, "error");
     }
   } catch (error) {
     console.error("Error cambiando contraseña:", error);
-    showMessage("❌ Error de conexión. Intenta nuevamente.", "error");
+    showMessage(" Error de conexión. Intenta nuevamente.", "error");
   } finally {
     setButtonLoading(submitBtn, false);
   }
@@ -86,28 +86,25 @@ function validatePasswordForm(currentPassword, newPassword, confirmPassword) {
   clearMessages();
 
   if (!currentPassword || !newPassword || !confirmPassword) {
-    showMessage("❌ Todos los campos son requeridos", "error");
+    showMessage(" Todos los campos son requeridos", "error");
     return false;
   }
 
   if (newPassword.length < 6) {
     showMessage(
-      "❌ La nueva contraseña debe tener al menos 6 caracteres",
+      " La nueva contraseña debe tener al menos 6 caracteres",
       "error"
     );
     return false;
   }
 
   if (newPassword !== confirmPassword) {
-    showMessage("❌ Las contraseñas no coinciden", "error");
+    showMessage(" Las contraseñas no coinciden", "error");
     return false;
   }
 
   if (currentPassword === newPassword) {
-    showMessage(
-      "❌ La nueva contraseña debe ser diferente a la actual",
-      "error"
-    );
+    showMessage(" La nueva contraseña debe ser diferente a la actual", "error");
     return false;
   }
 

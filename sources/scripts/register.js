@@ -13,7 +13,7 @@
 // register.js - Manejo del formulario de registro
 
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("📝 Formulario de registro inicializado");
+  console.log("Formulario de registro inicializado");
 
   const registerForm = document.getElementById("registerForm");
   if (!registerForm) return;
@@ -69,7 +69,7 @@ async function handleRegister(e) {
     }
   } catch (error) {
     console.error("Error en registro:", error);
-    showMessage("❌ Error de conexión. Intenta nuevamente.", "error");
+    showMessage("Error de conexión. Intenta nuevamente.", "error");
   } finally {
     setButtonLoading(submitBtn, false);
   }
@@ -86,17 +86,17 @@ function validateForm(nombre, email, password) {
   clearMessages();
 
   if (!nombre || !email || !password) {
-    showMessage("❌ Todos los campos son requeridos", "error");
+    showMessage(" Todos los campos son requeridos", "error");
     return false;
   }
 
   if (password.length < 6) {
-    showMessage("❌ La contraseña debe tener al menos 6 caracteres", "error");
+    showMessage(" La contraseña debe tener al menos 6 caracteres", "error");
     return false;
   }
 
   if (!isValidEmail(email)) {
-    showMessage("❌ Ingresa un email válido", "error");
+    showMessage(" Ingresa un email válido", "error");
     return false;
   }
 

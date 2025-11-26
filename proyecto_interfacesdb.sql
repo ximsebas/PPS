@@ -4,7 +4,6 @@
 -- FUNCIONALIDADES:
 -- - Crea estructura de tablas para usuarios y favoritos
 -- - Define relaciones y restricciones
--- - Incluye datos de ejemplo para testing
 -- =============================================
 
 -- phpMyAdmin SQL Dump

@@ -7,7 +7,6 @@
  * - Valida datos de registro
  * - Verifica duplicados de email
  * - Aplica hash a contraseñas
- * - Inicia sesión automáticamente
  * =============================================
  */
 

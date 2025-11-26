@@ -6,7 +6,6 @@
  * FUNCIONALIDADES:
  * - Recupera películas/series favoritas
  * - Ordena por fecha de agregado (más reciente primero)
- * - Retorna formato JSON para frontend
  * =============================================
  */
 

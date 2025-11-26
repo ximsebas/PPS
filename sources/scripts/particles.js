@@ -58,7 +58,7 @@ function createParticles(containerId = "particles", count = 12, colors = null) {
     container.appendChild(particle);
   }
 
-  console.log(`🎉 ${count} partículas creadas en #${containerId}`);
+  console.log(` ${count} partículas creadas en #${containerId}`);
 }
 
 /**
@@ -69,7 +69,7 @@ function cleanupParticles(containerId = "particles") {
   const container = document.getElementById(containerId);
   if (container) {
     container.innerHTML = "";
-    console.log(`🧹 Partículas limpiadas de #${containerId}`);
+    console.log(` Partículas limpiadas de #${containerId}`);
   }
 }
 

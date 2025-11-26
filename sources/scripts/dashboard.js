@@ -77,11 +77,11 @@ const POPULAR_MOVIES = [
 ];
 
 /**
- * Películas actuales (2022-2024) para recomendaciones
+ * Películas actuales (2022-2025) para recomendaciones
  * @constant {string[]} POPULAR_CURRENT_MOVIES - Películas recientes populares
  */
 const POPULAR_CURRENT_MOVIES = [
-  // 2024
+  // 2025
   "Dune: Part Two",
   "Kingdom of the Planet of the Apes",
   "Furiosa: A Mad Max Saga",
@@ -211,61 +211,61 @@ const POPULAR_CURRENT_SERIES = [
  * @returns {Promise<void>}
  */
 async function searchMovies(query) {
-  console.log("🔍 ===== INICIANDO BÚSQUEDA =====");
-  console.log("🔍 Término de búsqueda:", query);
-  console.log("🔍 API Key actual:", API_KEY);
+  console.log(" ===== INICIANDO BÚSQUEDA =====");
+  console.log(" Término de búsqueda:", query);
+  console.log(" API Key actual:", API_KEY);
 
   clearPopularSection();
 
   if (!query.trim()) {
-    console.log("❌ Búsqueda vacía");
+    console.log("Búsqueda vacía");
     showMessage("Por favor ingresa un término de búsqueda");
     return;
   }
 
-  console.log("🔄 Mostrando loading...");
+  console.log(" Mostrando loading...");
   loading.style.display = "block";
   moviesContainer.innerHTML = "";
 
   try {
     const url = `${API_URL}?apikey=${API_KEY}&s=${encodeURIComponent(query)}`;
-    console.log("🌐 URL de petición:", url);
+    console.log(" URL de petición:", url);
 
-    console.log("📡 Haciendo fetch...");
+    console.log(" Haciendo fetch...");
     const response = await fetch(url);
-    console.log("✅ Fetch completado");
-    console.log("📡 Status:", response.status);
-    console.log("📡 OK?:", response.ok);
+    console.log(" Fetch completado");
+    console.log(" Status:", response.status);
+    console.log(" OK?:", response.ok);
 
-    console.log("📊 Parseando JSON...");
+    console.log(" Parseando JSON...");
     const data = await response.json();
-    console.log("✅ JSON parseado correctamente");
-    console.log("📊 Respuesta completa:", data);
+    console.log(" JSON parseado correctamente");
+    console.log(" Respuesta completa:", data);
 
-    console.log("🔄 Ocultando loading...");
+    console.log(" Ocultando loading...");
     loading.style.display = "none";
 
     if (data.Response === "True") {
-      console.log("🎉 ÉXITO! Resultados encontrados:", data.Search.length);
-      console.log("📝 Primer resultado:", data.Search[0]);
+      console.log(" ÉXITO! Resultados encontrados:", data.Search.length);
+      console.log(" Primer resultado:", data.Search[0]);
 
-      console.log("🔄 Llamando a displayMovies...");
+      console.log(" Llamando a displayMovies...");
       displayMovies(data.Search);
-      console.log("✅ displayMovies completado");
+      console.log(" displayMovies completado");
     } else {
-      console.log("❌ Error en respuesta API:", data.Error);
+      console.log(" Error en respuesta API:", data.Error);
       showMessage("❌ " + (data.Error || "No se encontraron películas"));
     }
   } catch (error) {
-    console.error("💥 ERROR CAPTURADO:", error);
-    console.error("💥 Mensaje de error:", error.message);
-    console.error("💥 Stack trace:", error.stack);
+    console.error(" ERROR CAPTURADO:", error);
+    console.error(" Mensaje de error:", error.message);
+    console.error(" Stack trace:", error.stack);
 
     loading.style.display = "none";
-    showMessage("❌ Error al buscar películas. Revisa tu conexión.");
+    showMessage(" Error al buscar películas. Revisa tu conexión.");
   }
 
-  console.log("🔍 ===== BÚSQUEDA FINALIZADA =====");
+  console.log(" ===== BÚSQUEDA FINALIZADA =====");
 }
 
 /**
@@ -274,10 +274,10 @@ async function searchMovies(query) {
  * @returns {Promise<void>}
  */
 async function getRandomMovie() {
-  console.log("🎲 Buscando Película del Día...");
+  console.log(" Buscando Película del Día...");
 
   if (!randomMovieBtn) {
-    console.error("❌ No se encontró el botón de película aleatoria");
+    console.error(" No se encontró el botón de película aleatoria");
     return;
   }
 
@@ -295,7 +295,7 @@ async function getRandomMovie() {
       POPULAR_CURRENT_MOVIES[
         Math.floor(Math.random() * POPULAR_CURRENT_MOVIES.length)
       ];
-    console.log(`🔍 Buscando película específica: "${randomMovie}"`);
+    console.log(` Buscando película específica: "${randomMovie}"`);
 
     // Buscar en la API
     const searchURL = `${API_URL}?apikey=${API_KEY}&s=${encodeURIComponent(
@@ -306,7 +306,7 @@ async function getRandomMovie() {
     if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
 
     const data = await response.json();
-    console.log("📊 Respuesta de API:", data);
+    console.log(" Respuesta de API:", data);
 
     // Limpiar estado de carga
     loading.style.display = "none";
@@ -318,7 +318,7 @@ async function getRandomMovie() {
       const bestMatch = findBestMatch(data.Search, randomMovie);
       if (bestMatch) {
         console.log(
-          "🎉 Película actual encontrada:",
+          " Película actual encontrada:",
           bestMatch.Title,
           "(",
           bestMatch.Year,
@@ -328,19 +328,19 @@ async function getRandomMovie() {
         createConfettiEffect("movie");
       } else {
         showMessage(
-          "❌ No se pudo encontrar información de la película. Intenta nuevamente."
+          " No se pudo encontrar información de la película. Intenta nuevamente."
         );
       }
     } else {
-      showMessage("❌ Película no encontrada. Intenta con otra opción.");
+      showMessage(" Película no encontrada. Intenta con otra opción.");
     }
   } catch (error) {
-    console.error("❌ Error buscando película:", error);
+    console.error(" Error buscando película:", error);
     loading.style.display = "none";
     randomMovieBtn.classList.remove("loading");
     randomMovieBtn.innerHTML =
       '<span class="btn-icon">🎬</span>Película del Día';
-    showMessage("❌ Error al buscar película. Revisa tu conexión.");
+    showMessage(" Error al buscar película. Revisa tu conexión.");
   }
 }
 
@@ -350,10 +350,10 @@ async function getRandomMovie() {
  * @returns {Promise<void>}
  */
 async function getRandomSeries() {
-  console.log("🎲 Buscando Serie del Día...");
+  console.log(" Buscando Serie del Día...");
 
   if (!randomSeriesBtn) {
-    console.error("❌ No se encontró el botón de serie aleatoria");
+    console.error(" No se encontró el botón de serie aleatoria");
     return;
   }
 
@@ -369,7 +369,7 @@ async function getRandomSeries() {
       POPULAR_CURRENT_SERIES[
         Math.floor(Math.random() * POPULAR_CURRENT_SERIES.length)
       ];
-    console.log(`🔍 Buscando serie específica: "${randomSeries}"`);
+    console.log(` Buscando serie específica: "${randomSeries}"`);
 
     const searchURL = `${API_URL}?apikey=${API_KEY}&s=${encodeURIComponent(
       randomSeries
@@ -379,7 +379,7 @@ async function getRandomSeries() {
     if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
 
     const data = await response.json();
-    console.log("📊 Respuesta de API:", data);
+    console.log(" Respuesta de API:", data);
 
     loading.style.display = "none";
     randomSeriesBtn.classList.remove("loading");
@@ -388,23 +388,23 @@ async function getRandomSeries() {
     if (data.Response === "True" && data.Search && data.Search.length > 0) {
       const bestMatch = findBestMatch(data.Search, randomSeries);
       if (bestMatch) {
-        console.log("🎉 Serie encontrada:", bestMatch.Title);
+        console.log(" Serie encontrada:", bestMatch.Title);
         displayRandomContent(bestMatch, "series");
         createConfettiEffect("series");
       } else {
         showMessage(
-          "❌ No se pudo encontrar información de la serie. Intenta nuevamente."
+          "No se pudo encontrar información de la serie. Intenta nuevamente."
         );
       }
     } else {
-      showMessage("❌ Serie no encontrada. Intenta con otra opción.");
+      showMessage(" Serie no encontrada. Intenta con otra opción.");
     }
   } catch (error) {
-    console.error("❌ Error buscando serie:", error);
+    console.error("Error buscando serie:", error);
     loading.style.display = "none";
     randomSeriesBtn.classList.remove("loading");
     randomSeriesBtn.innerHTML = '<span class="btn-icon">📺</span>Serie del Día';
-    showMessage("❌ Error al buscar serie. Revisa tu conexión.");
+    showMessage("Error al buscar serie. Revisa tu conexión.");
   }
 }
 
@@ -417,21 +417,21 @@ async function getRandomSeries() {
  * @param {Array} movies - Array de objetos de películas
  */
 function displayMovies(movies) {
-  console.log("🎬 ===== INICIANDO DISPLAY MOVIES =====");
-  console.log("🎬 Número de películas a mostrar:", movies.length);
+  console.log("===== INICIANDO DISPLAY MOVIES =====");
+  console.log("Número de películas a mostrar:", movies.length);
 
   if (!movies || movies.length === 0) {
-    console.log("❌ No hay películas para mostrar");
+    console.log("No hay películas para mostrar");
     moviesContainer.innerHTML =
       '<div class="message">No se encontraron resultados</div>';
     return;
   }
 
   try {
-    console.log("🔄 Generando HTML...");
+    console.log("Generando HTML...");
     const moviesHTML = movies
       .map((movie, index) => {
-        console.log(`🎬 Procesando película ${index + 1}:`, movie.Title);
+        console.log(`Procesando película ${index + 1}:`, movie.Title);
 
         const safeMovieId = movie.imdbID || "unknown";
         const safeTitle = movie.Title || "Sin título";
@@ -456,19 +456,19 @@ function displayMovies(movies) {
       })
       .join("");
 
-    console.log("✅ HTML generado correctamente");
-    console.log("🔄 Insertando en el DOM...");
+    console.log("HTML generado correctamente");
+    console.log("Insertando en el DOM...");
 
     moviesContainer.innerHTML = moviesHTML;
-    console.log("✅ Contenido insertado en el DOM");
+    console.log("Contenido insertado en el DOM");
   } catch (error) {
-    console.error("💥 ERROR en displayMovies:", error);
-    console.error("💥 Mensaje:", error.message);
+    console.error("ERROR en displayMovies:", error);
+    console.error("Mensaje:", error.message);
     moviesContainer.innerHTML =
       '<div class="message">Error al mostrar los resultados</div>';
   }
 
-  console.log("🎬 ===== DISPLAY MOVIES FINALIZADO =====");
+  console.log("===== DISPLAY MOVIES FINALIZADO =====");
 }
 
 /**
@@ -709,7 +709,7 @@ function createConfetti() {
  */
 const translateToSpanish = async (text) => {
   if (!text || text === "Sinopsis no disponible" || text === "No disponible") {
-    console.log("⏩ Texto no necesita traducción");
+    console.log(" Texto no necesita traducción");
     return text;
   }
 
@@ -728,17 +728,17 @@ const translateToSpanish = async (text) => {
  * @async
  */
 window.toggleTranslation = async function () {
-  console.log("🔄 Botón de traducción clickeado");
+  console.log("Botón de traducción clickeado");
 
   translationsEnabled = !translationsEnabled;
   const button = document.getElementById("translateBtn");
 
-  console.log("🎚️ Estado de traducción:", translationsEnabled);
+  console.log("Estado de traducción:", translationsEnabled);
 
   if (translationsEnabled) {
     button.innerHTML = "🌍 Traducción: ON";
     button.classList.add("active");
-    console.log("🚀 Iniciando traducción...");
+    console.log("Iniciando traducción...");
     await translateCurrentMovie();
     createConfetti();
   } else {
@@ -910,13 +910,13 @@ window.addToFavorites = async function (
     console.log("Respuesta del servidor:", result);
 
     if (result.success) {
-      alert(`🎉 "${movieTitle}" agregada a favoritos!`);
+      alert(` "${movieTitle}" agregada a favoritos!`);
     } else {
       alert(`⚠️ ${result.message}`);
     }
   } catch (error) {
     console.error("Error:", error);
-    alert("❌ Error al agregar a favoritos");
+    alert("Error al agregar a favoritos");
   }
 };
 
@@ -1051,15 +1051,15 @@ document.addEventListener("DOMContentLoaded", async function () {
 document.addEventListener("DOMContentLoaded", function () {
   if (randomMovieBtn) {
     randomMovieBtn.addEventListener("click", getRandomMovie);
-    console.log("✅ Botón de Película del Día inicializado");
+    console.log("Botón de Película del Día inicializado");
   } else {
-    console.error("❌ No se pudo encontrar el botón de Película del Día");
+    console.error("No se pudo encontrar el botón de Película del Día");
   }
 
   if (randomSeriesBtn) {
     randomSeriesBtn.addEventListener("click", getRandomSeries);
-    console.log("✅ Botón de Serie del Día inicializado");
+    console.log("Botón de Serie del Día inicializado");
   } else {
-    console.error("❌ No se pudo encontrar el botón de Serie del Día");
+    console.error("No se pudo encontrar el botón de Serie del Día");
   }
 });

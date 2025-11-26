@@ -5,8 +5,7 @@
  * DESCRIPCIÓN: Verifica el estado de la sesión del usuario
  * FUNCIONALIDADES:
  * - Comprueba si el usuario está autenticado
- * - Retorna información del usuario en sesión
- * - NO incluye conexión a BD (solo usa sesiones)
+ * - NO incluye conexión a BD
  * =============================================
  */
 

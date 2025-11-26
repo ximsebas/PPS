@@ -6,7 +6,6 @@
  * FUNCIONALIDADES:
  * - Verifica permisos de usuario
  * - Elimina favoritos específicos
- * - Valida propiedad del recurso
  * =============================================
  */
 

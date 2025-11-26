@@ -39,35 +39,35 @@ User ID: 1
 Movie ID recibido: '813' (tipo: string)
 Movie Title: 'Shrek 2'
 Movie Year: '2004'
-✅ Película AGREGADA exitosamente - ID: 813, Título: Shrek 2
+ Película AGREGADA exitosamente - ID: 813, Título: Shrek 2
 
 === 2025-11-07 05:37:09 ===
 User ID: 1
 Movie ID recibido: '246' (tipo: string)
 Movie Title: 'Titanic'
 Movie Year: '1997'
-✅ Película AGREGADA exitosamente - ID: 246, Título: Titanic
+ Película AGREGADA exitosamente - ID: 246, Título: Titanic
 
 === 2025-11-07 05:37:54 ===
 User ID: 1
 Movie ID recibido: '416' (tipo: string)
 Movie Title: 'Harry Potter and the Deathly Hallows: Part 2'
 Movie Year: '2011'
-✅ Película AGREGADA exitosamente - ID: 416, Título: Harry Potter and the Deathly Hallows: Part 2
+ Película AGREGADA exitosamente - ID: 416, Título: Harry Potter and the Deathly Hallows: Part 2
 
 === 2025-11-07 05:38:15 ===
 User ID: 2
 Movie ID recibido: '240' (tipo: string)
 Movie Title: 'The Avengers'
 Movie Year: '2012'
-✅ Película AGREGADA exitosamente - ID: 240, Título: The Avengers
+ Película AGREGADA exitosamente - ID: 240, Título: The Avengers
 
 === 2025-11-07 06:03:26 ===
 User ID: 1
 Movie ID recibido: 'tt1216475' (tipo: string)
 Movie Title: 'Cars 2'
 Movie Year: '2011'
-❌ ERROR: Movie ID no es un número válido: tt1216475
+ ERROR: Movie ID no es un número válido: tt1216475
 # =============================================
 # RESUMEN: Log muestra operaciones exitosas y fallidas
 # - Prevención de duplicados funcionando correctamente

@@ -7,7 +7,6 @@
  * - Verifica autenticación del usuario
  * - Valida datos de entrada
  * - Previene duplicados en favoritos
- * - Gestiona inserción en base de datos
  * =============================================
  */
 

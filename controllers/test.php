@@ -11,10 +11,10 @@
  */
 
 include 'database.php';
-echo "✅ Conexión a MySQL exitosa!<br>";
+echo "Conexión a MySQL exitosa!<br>";
 
 // Probar consulta básica a la base de datos
 $stmt = $pdo->query("SELECT COUNT(*) as total FROM usuarios");
 $result = $stmt->fetch();
-echo "✅ usuarios en la base de datos: " . $result['total'];
+echo "usuarios en la base de datos: " . $result['total'];
 ?>

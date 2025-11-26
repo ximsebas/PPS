@@ -7,7 +7,6 @@
  * - Verifica identidad del usuario
  * - Valida contraseña actual
  * - Aplica hash a nueva contraseña
- * - Actualiza credenciales en BD
  * =============================================
  */
 

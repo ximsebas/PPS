@@ -55,8 +55,8 @@ try {
     echo "<p> <strong>Ahora puedes usar la aplicación normalmente</strong></p>";
 
 } catch (\PDOException $e) {
-    echo "<h2>❌ Error en la inicialización</h2>";
+    echo "<h2> Error en la inicialización</h2>";
     echo "<p><strong>Error:</strong> " . $e->getMessage() . "</p>";
-    echo "<p>⚠️ Verifica que la base de datos 'proyecto_interfacesdb' existe</p>";
+    echo "<p> Verifica que la base de datos 'proyecto_interfacesdb' existe</p>";
 }
 ?>

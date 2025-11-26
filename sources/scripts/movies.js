@@ -64,7 +64,7 @@ class MovieSearch {
                 <button onclick="addToFavorites(${movie.imdbID}, '${
           movie.Title
         }')">
-                    ♡ Favorito
+                    ♡ Favoritos
                 </button>
             </div>
         `
