@@ -25,7 +25,7 @@
  * @constant {string} API_KEY - Clave para acceder a la API
  * @constant {string} API_URL - Endpoint base de la API
  */
-const API_KEY = "9672c5f5";
+const API_KEY = "e753f788"; // 9672c5f5 //eaa6e858 //118cf724
 const API_URL = "https://www.omdbapi.com/";
 
 /**
